@@ -1,0 +1,32 @@
+service: ned-assignment
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+frameworkVersion: ">=2.0.0"
+
+provider:
+  name: aws
+  stage: dev
+  region: us-east-1
+  apiName: ${self:service}
+  memorySize: 128 #mb
+  timeout: 30 #seconds
+  environment:
+    REGEX_ORG_NAMES: ${self:custom.regex_value}
+    COPYRIGHT_SYMBOL: ${self:custom.copyright_symbol}
+  lambdaHashingVersion: 20201221
+  stackName: ned-assignment-stack
+
+custom:
+  regex_value: (Google|Amazon|Oracle|Microsoft|Deloitte)
+  copyright_symbol: \1©
+
+functions:
+  copyright:
+    handler: src/copyright_handler.do
+    name: do-copyright
+    events:
+      - http:
+          path: /copyright
+          method: POST
+          cors: true
