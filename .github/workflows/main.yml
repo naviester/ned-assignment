@@ -1,0 +1,51 @@
+name: ned-assignment-cicd
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # strategy:
+    #   matrix:
+    #     stages:
+    #       - stage: 'dev'
+    #         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # - name: Setup Python 3.x
+      #   uses: actions/setup-python@v2
+      #   with:
+      #     python-version: "3.x"
+
+      # - name: Install dependencies
+      #   run: python -m pip install --upgrade pip  
+      
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
+      - name: Setup Nodejs
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+
+      - name: Install NPM dependencies
+        run: npm install
+
+      - name: Install serverless
+        run: npm install -g serverless
+
+      - name: serverless deploy
+        uses: serverless/github-action@master
+        with:
+          args: deploy
+        env:
+          # SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+            # if using AWS credentials directly
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

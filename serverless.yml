@@ -6,9 +6,10 @@ frameworkVersion: ">=2.0.0"
 
 provider:
   name: aws
+  runtime: python3.8
   stage: dev
   region: us-east-1
-  apiName: ${self:service}
+  # apiName: ${self:service}
   memorySize: 128 #mb
   timeout: 30 #seconds
   environment:
@@ -21,12 +22,20 @@ custom:
   regex_value: (Google|Amazon|Oracle|Microsoft|Deloitte)
   copyright_symbol: \1©
 
+package:
+  patterns:
+    - '!./.github/**'
+    - '!./*.md'
+    - '!./.gitignore'
+    - '!./.npmignore'
+    - '!./.serverless/**'
+
 functions:
   copyright:
     handler: src/copyright_handler.do
-    name: do-copyright
+    # name: do-copyright
     events:
       - http:
           path: /copyright
-          method: POST
+          method: post
           cors: true

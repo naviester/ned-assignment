@@ -3,20 +3,40 @@ import re
 import os
 
 # retrieve REGEX_ORG_MANES value from serverless.yml file
-REGEX_ORG_MANES = os.environ['REGEX_ORG_MANES']
+REGEX_ORG_NAMES = os.environ['REGEX_ORG_NAMES']
 
 # retrieve COPYRIGHT_SYMBOL value from serverless.yml file
 COPYRIGHT_SYMBOL = os.environ['COPYRIGHT_SYMBOL']
 
+RESPONSE_HEADERS = {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Credentials": "true"}
+
 def do(event, context):
     
-    if event :
-        # You can manually specify the number of replacements by changing the 4th argument
-        result = re.sub(REGEX_ORG_MANES, COPYRIGHT_SYMBOL, event['message'], 0, re.MULTILINE | re.IGNORECASE | re.UNICODE)
-        if result:
-            print (result)
-        response = {"statusCode": 200, "body": result}
-    else :
-        response = {"statusCode": 400, "body": "empty body not allowed"}
-
+    try:
+        message = json.loads(event['body'])['message']
+        result = re.sub(REGEX_ORG_NAMES, COPYRIGHT_SYMBOL, message, 0, re.MULTILINE | re.IGNORECASE | re.UNICODE)
+        status_code = 200
+        body = {
+            "data":{
+                "message":result
+            },
+            "error": None
+        }
+    except Exception:
+        status_code = 400
+        body = {
+            "data":None,
+            "error": {
+                "errorCode":400,
+                "errorMessage": "Something went wrong"
+            }
+        }
+       
+    body["status"]= "Succes" if status_code ==200 else "Failure"
+    
+    response = {
+        "statusCode":status_code,
+        "body": json.dumps(body),
+        "headers": RESPONSE_HEADERS
+    }
     return response
