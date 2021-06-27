@@ -1,0 +1,90 @@
+---
+openapi: 3.0.0
+info:
+  title: NeD-Assignment
+  description: This is a simple API to append © in front of pre-selected company names.
+  contact:
+    email: naviester@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://zuzztewa5m.execute-api.us-east-1.amazonaws.com/dev
+  description: Host URL.
+paths:
+  /copyright:
+    post:
+      tags:
+      - sample
+      summary: Appends © in front of pre-selected company names
+      description: 'This API appends © in from of pre-selected company names viz: Google, Amazon, Microsoft, Oracle & Deloitte.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageRequestBody'
+      responses:
+        "200":
+          description: Successfully appended © in front of selected company names.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsetBody'
+        "400":
+          description: invalid input, object invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    MessageRequestBody:
+      type: object
+      properties:
+        message:
+          title: Message
+          type: string
+    ResponsetBody:
+      type: object
+      properties:
+        status:
+          title: Status
+          type: string
+        data:
+          $ref: '#/components/schemas/Data'
+        error:
+          title: Error
+          type: object
+          nullable: true
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - error
+      - status
+      type: object
+      properties:
+        status:
+          title: Status
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
+        data:
+          title: Data
+          type: object
+          nullable: true
+    Data:
+      type: object
+      properties:
+        message:
+          title: Message
+          type: string
+    Error:
+      type: object
+      properties:
+        error_code:
+          title: errorCode
+          type: integer
+        error_message:
+          title: errorMessage
+          type: string
