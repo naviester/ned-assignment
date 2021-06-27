@@ -1,6 +1,6 @@
-[![ned-assignment-cicd](https://github.com/naviester/ned-assignment/actions/workflows/main.yml/badge.svg)](https://github.com/naviester/ned-assignment/actions/workflows/main.yml)
+[![ned-assignment-cicd](https://github.com/naviester/ned-assignment/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/naviester/ned-assignment/actions/workflows/main.yml)
 
-[![CodeQL](https://github.com/naviester/ned-assignment/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/naviester/ned-assignment/actions/workflows/codeql-analysis.yml)
+[![ned-assignment-CodeQL](https://github.com/naviester/ned-assignment/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/naviester/ned-assignment/actions/workflows/codeql-analysis.yml)
 
 # ned-assignment
 
