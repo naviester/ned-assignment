@@ -32,7 +32,7 @@ package:
 
 functions:
   copyright:
-    handler: src/copyright_handler.do
+    handler: src/copyright_handler.append_copyright
     # name: do-copyright
     events:
       - http:

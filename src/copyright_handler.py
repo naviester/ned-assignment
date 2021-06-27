@@ -10,7 +10,7 @@ COPYRIGHT_SYMBOL = os.environ['COPYRIGHT_SYMBOL']
 
 RESPONSE_HEADERS = {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Credentials": "true"}
 
-def do(event, context):
+def append_copyright(event, context):
     
     try:
         message = json.loads(event['body'])['message']
@@ -32,8 +32,8 @@ def do(event, context):
             }
         }
        
-    body["status"]= "Succes" if status_code ==200 else "Failure"
-    
+    body["status"]= "Succes" if status_code == 200 else "Failure"
+
     response = {
         "statusCode":status_code,
         "body": json.dumps(body),

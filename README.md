@@ -2,6 +2,13 @@
 
 Cloud Assignment to create API to find and append copyright symbol to company names
 
+## Pre-defined conpany names to be considered while implementing the service:
+- Google
+- Amazon
+- Oracle
+- Deloitte
+- Microsoft
+
 ## Swagger UI and API Documentation is available at:
 
 https://app.swaggerhub.com/apis/DAssignment/appendCopyrightSymbol/1.0.0
@@ -31,7 +38,7 @@ curl --location --request POST 'https://zuzztewa5m.execute-api.us-east-1.amazona
 ## Assignment Tech-stack:
 - Code developed in Python
 - Infrastructure Used
-    - AWS Lamdba
-    - AAWS API Gateway
+    - AWS Lamdba    
+    - AWS API Gateway
 - Framework used: **Serverless Framework**.
-- CI/CD using GitHub actions ()
+- Attempeted CI/CD process via GitHub actions
