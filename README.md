@@ -1,5 +1,7 @@
 [![ned-assignment-cicd](https://github.com/naviester/ned-assignment/actions/workflows/main.yml/badge.svg)](https://github.com/naviester/ned-assignment/actions/workflows/main.yml)
 
+[![CodeQL](https://github.com/naviester/ned-assignment/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/naviester/ned-assignment/actions/workflows/codeql-analysis.yml)
+
 # ned-assignment
 
 Cloud Assignment to create API to find and append copyright symbol to company names
